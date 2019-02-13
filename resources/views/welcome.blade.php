@@ -79,8 +79,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel Welcome Page <br> 
                 </div>
+                <p>
+                    (see resources¥views¥welcome.blade.php)
+                </p>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
