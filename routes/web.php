@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/* Laravelの初期設定をコメントアウトする
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+*/
+
+Route::get('/', 'TasksController@index');
+
+Route::resource('tasks', 'TasksController');
