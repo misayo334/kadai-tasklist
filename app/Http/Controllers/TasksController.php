@@ -44,9 +44,16 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->Title <> null) {
+
+
+        
+//        if($request->Title <> null) {
+
             $task = new Task;
-            $task->title = $request->Title;
+            
+//            $task->title = $request->Title;
+            $task->title = "no details provided";
+            
             if($request->Details <> null){
                 $task->details = $request->Details;  
             }
@@ -54,15 +61,18 @@ class TasksController extends Controller
                 $task->details = "no details provided"; 
             }
             
+            $task->content = $request->content;
+            
             $task->status = "open";
+            $task->status_short = "open";
             
             $task->save();
             
             return redirect('/');
-        }
-        else {
+//        }
+//        else {
             echo 'You did not fill out the form properly.  Use browser "return" button to return to the previous page.';
-        }
+//        }
     }
 
     /**
@@ -109,17 +119,26 @@ class TasksController extends Controller
         $task = Task::find($id);
         
         $task->title = $task->title;
+        
         if($request->details <> null){
             $task->details = $request->details;  
         }
         else {
             $task->details = "no details provided"; 
         }
+        
         if($request->status <> null){
             $task->status = $request->status;  
         }
         else {
             $task->details = "open"; 
+        }
+        
+        if($request->content <> null){
+            $task->content = $request->content;  
+        }
+        else {
+            $task->content = "no details provided"; 
         }
             
             $task->save();

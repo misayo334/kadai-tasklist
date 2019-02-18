@@ -9,6 +9,7 @@
             <th>ID</th>
             <td>{{ $task->id }}</td>
         </tr>
+<!--課題提出には不要のため、コメントアウトする（あとで戻す）
         <tr>
             <th>Task Title</th>
             <td>{{ $task->title }}</td>
@@ -28,6 +29,11 @@
         <tr>
             <th>Task Updated At</th>
             <td>{{ $task->updated_at }}</td>
+        </tr>
+-->
+        <tr>
+            <th>Task Content</th>
+            <td>{{ $task->content }}</td>
         </tr>
     </table>
     
