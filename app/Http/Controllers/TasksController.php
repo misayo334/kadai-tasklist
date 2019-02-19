@@ -50,7 +50,7 @@ class TasksController extends Controller
             'title' => 'max:191',
             'details' => 'max:191',
             'content' => 'required|max:191',
-            'status' => 'max:10',
+            'status' => 'max:191',
             'status_short' => 'required|max:10',
             ]);
 
@@ -139,7 +139,7 @@ class TasksController extends Controller
             'title' => 'max:191',
             'details' => 'max:191',
             'content' => 'required|max:191',
-            'status' => 'max:10',
+            'status' => 'max:191',
             'status_short' => 'required|max:10',
         ]);
             
