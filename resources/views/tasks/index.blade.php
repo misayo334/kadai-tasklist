@@ -35,6 +35,8 @@
         </table>
     @endif
     
+    {{ $tasks->render('pagination::bootstrap-4') }}
+    
     {!! link_to_route('tasks.create', 'Create New Task', null, ['class' => 'btn btn-link']) !!}
 
 @endsection
