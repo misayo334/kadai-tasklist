@@ -18,10 +18,7 @@
             <th>Task Detail</th>
             <td>{{ $task->details }}</td>
         </tr>
-        <tr>
-            <th>Task Status</th>
-            <td>{{ $task->status }}</td>
-        </tr>
+-->
         <tr>
             <th>Task Created At</th>
             <td>{{ $task->created_at }}</td>
@@ -29,8 +26,15 @@
         <tr>
             <th>Task Updated At</th>
             <td>{{ $task->updated_at }}</td>
+        <tr>
+            <th>Task Status (short)</th>
+            <td>{{ $task->status_short }}</td>
         </tr>
--->
+        <tr>
+            <th>Task Status Comment</th>
+            <td>{{ $task->status }}</td>
+        </tr>
+        </tr>
         <tr>
             <th>Task Content</th>
             <td>{{ $task->content }}</td>

@@ -44,7 +44,13 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-
+            $this->validate($request, [
+            'title' => 'max:191',
+            'details' => 'max:191',
+            'content' => 'required|max:191',
+            'status' => 'max:10',
+            'status_short' => 'required|max:10',
+            ]);
 
         
 //        if($request->Title <> null) {
@@ -54,24 +60,35 @@ class TasksController extends Controller
 //            $task->title = $request->Title;
             $task->title = "no details provided";
             
-            if($request->Details <> null){
-                $task->details = $request->Details;  
+            if($request->details <> null){
+                $task->details = $request->details;  
             }
             else {
                 $task->details = "no details provided"; 
             }
             
-            $task->content = $request->content;
+            if($request->content <> null){
+                $task->content = $request->content;  
+            }
+            else {
+                $task->content = "no details provided"; 
+            }
             
-            $task->status = "open";
-            $task->status_short = "open";
+            if($request->status <> null){
+                $task->status = $request->status;  
+            }
+            else {
+                $task->status = "no status comment provided"; 
+            }
+            
+            $task->status_short = $request->status_short;
             
             $task->save();
             
             return redirect('/');
 //        }
 //        else {
-            echo 'You did not fill out the form properly.  Use browser "return" button to return to the previous page.';
+//            echo 'You did not fill out the form properly.  Use browser "return" button to return to the previous page.';
 //        }
     }
 
@@ -116,6 +133,14 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'title' => 'max:191',
+            'details' => 'max:191',
+            'content' => 'required|max:191',
+            'status' => 'max:10',
+            'status_short' => 'required|max:10',
+        ]);
+            
         $task = Task::find($id);
         
         $task->title = $task->title;
@@ -131,7 +156,7 @@ class TasksController extends Controller
             $task->status = $request->status;  
         }
         else {
-            $task->details = "open"; 
+            $task->status = "no status comment provided"; 
         }
         
         if($request->content <> null){
@@ -140,7 +165,8 @@ class TasksController extends Controller
         else {
             $task->content = "no details provided"; 
         }
-            
+        
+            $task->status_short = $request->status_short;
             $task->save();
             
             return redirect('/');

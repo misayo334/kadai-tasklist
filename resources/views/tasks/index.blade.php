@@ -12,8 +12,9 @@
 <!--課題提出には不要のため、コメントアウトする（あとで戻す）
                     <th>Task</th>
                     <th>Task Detail</th>
-                    <th>Task Status</th>
 -->
+                    <th>Task Status (short)</th>
+                    <th>Task Status Comment</th>
                     <th>Task Content</th>
                 </tr>
             </thead>
@@ -24,8 +25,9 @@
 <!--課題提出には不要のため、コメントアウトする（あとで戻す）
                     <td>{{ $task->title }}</td>
                     <td>{{ $task->details }}</td>
-                    <td>{{ $task->status }}</td>
 -->
+                    <td>{{ $task->status_short }}</td>
+                    <td>{{ $task->status }}</td>
                     <td>{{ $task->content }}</td>
                 </tr>
                 @endforeach
