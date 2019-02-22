@@ -20,9 +20,14 @@
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav">
 <!--ここはあとで修正必要！！-->
-                        <li>{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>
-                        <li><a href="#">Login</a></li>
-                        <li>{!! link_to_route('tasks.create', 'Create New Task', [], ['class' => 'nav-link']) !!}</li>
+                        @if (Auth::check())
+                            <li>{!! link_to_route('tasks.create', 'New Task', [], ['class' => 'nav-link']) !!}</li>
+                            <li>{!! link_to_route('logout.get', 'Logout', [], ['class' => 'nav-link']) !!}</li>
+                        @else
+                            <li>{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>
+                            <li>{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}</li>
+
+                        @endif
 <!--ここはあとで修正必要！！（終わり）-->
                     </ul>
                 </div>
