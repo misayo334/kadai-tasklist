@@ -18,7 +18,12 @@
                 
                 <div class="collapse navbar-collapse" id="nav-bar">
                     <ul class="navbar-nav mr-auto"></ul>
-                    <ul class="navbar-nav">{!! link_to_route('tasks.create', 'Create New Task', [], ['class' => 'nav-link']) !!}</li>
+                    <ul class="navbar-nav">
+<!--ここはあとで修正必要！！-->
+                        <li>{!! link_to_route('signup.get', 'Signup', [], ['class' => 'nav-link']) !!}</li>
+                        <li><a href="#">Login</a></li>
+                        <li>{!! link_to_route('tasks.create', 'Create New Task', [], ['class' => 'nav-link']) !!}</li>
+<!--ここはあとで修正必要！！（終わり）-->
                     </ul>
                 </div>
             </nav>

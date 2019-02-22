@@ -38,5 +38,10 @@
     {{ $tasks->render('pagination::bootstrap-4') }}
     
     {!! link_to_route('tasks.create', 'Create New Task', null, ['class' => 'btn btn-link']) !!}
+    
+    <br>
+    <br>
+    
+    {!! link_to_route('signup.get', '便宜的に今はここに追加：Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
 
 @endsection
