@@ -41,14 +41,14 @@
     
     <br>
     <br>
-<!--あとで要修正-->
+
     @if (Auth::check())
-        {!! link_to_route('logout.get', '便宜的に今はここに追加：Logout' , [], ['class' => 'btn btn-lg btn-secondary']) !!}
+        {!! link_to_route('logout.get', 'Logout' , [], ['class' => 'btn btn-lg btn-secondary']) !!}
     @else
-        {!! link_to_route('signup.get', '便宜的に今はここに追加：Sign up now!', [], ['class' => 'btn btn-lg btn-secondary']) !!}
+        {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-secondary']) !!}
         <br>
         <br>
-        {!! link_to_route('login', '便宜的に今はここに追加：Login', [], ['class' => 'btn btn-lg btn-secondary']) !!}
+        {!! link_to_route('login', 'Login', [], ['class' => 'btn btn-lg btn-secondary']) !!}
     @endif
-<!--あとで要修正（終わり）-->
+
 @endsection

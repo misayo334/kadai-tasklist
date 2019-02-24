@@ -41,13 +41,15 @@
         </tr>
     </table>
     
-    {!! link_to_route('tasks.edit', 'Edit this task', ['id' => $task->id], ['class' => 'btn btn-primary']) !!}
-    
-    {!! nl2br("\n") !!}
-    {!! nl2br("\n") !!}
-    
-    {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
-        {!! Form::submit('Delete this task', ['class' => 'btn btn-danger']) !!}
-    {!! Form::close() !!}
+    @if (Auth::check())
+        {!! link_to_route('tasks.edit', 'Edit this task', ['id' => $task->id], ['class' => 'btn btn-primary']) !!}
+        
+        {!! nl2br("\n") !!}
+        {!! nl2br("\n") !!}
+        
+        {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
+            {!! Form::submit('Delete this task', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
+    @endif
 
 @endsection

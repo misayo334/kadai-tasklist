@@ -18,7 +18,8 @@ class TasksTableSeeder extends Seeder
                 'details' => 'test details ' . $i,
                 'status' => 'test status comment ' . $i,
                 'status_short' => 'open',
-                'content' => 'test content ' . $i
+                'content' => 'test content ' . $i,
+                'user_id' => "2"
             ]);
         }
     }

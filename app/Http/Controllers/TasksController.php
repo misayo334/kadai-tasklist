@@ -15,13 +15,22 @@ class TasksController extends Controller
      */
     public function index()
     {
-//        $tasks = Task::all();
-//        $tasks = Task::paginate(25);
-        $tasks = Task::orderBy('id', 'desc')->paginate(25);
         
-        return view('tasks.index', [
-            'tasks' => $tasks,
-        ]);
+    $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasks = $user->tasks()->orderBy('id', 'desc')->paginate(25);
+            
+            $data = [
+                'user' => $user,
+                'tasks' => $tasks,
+            ];
+            
+            return view('tasks.index', [
+                'tasks' => $tasks,
+            ]);
+        }
+        return view('welcome');
     }
 
     /**
@@ -50,44 +59,55 @@ class TasksController extends Controller
             'title' => 'max:191',
             'details' => 'max:191',
             'content' => 'required|max:191',
-            'status' => 'max:191',
+            'status' => 'required|max:191',
             'status_short' => 'required|max:10',
             ]);
+            
+            
 
         
-//        if($request->Title <> null) {
+// //        if($request->Title <> null) {
 
-            $task = new Task;
+//             $task = new Task;
             
-//            $task->title = $request->Title;
-            $task->title = "no details provided";
+// //            $task->title = $request->Title;
+//             $task->title = "no details provided";
             
-            if($request->details <> null){
-                $task->details = $request->details;  
-            }
-            else {
-                $task->details = "no details provided"; 
-            }
+//             if($request->details <> null){
+//                 $task->details = $request->details;  
+//             }
+//             else {
+//                 $task->details = "no details provided"; 
+//             }
             
-            if($request->content <> null){
-                $task->content = $request->content;  
-            }
-            else {
-                $task->content = "no details provided"; 
-            }
+//             if($request->content <> null){
+//                 $task->content = $request->content;  
+//             }
+//             else {
+//                 $task->content = "no details provided"; 
+//             }
             
-            if($request->status <> null){
-                $task->status = $request->status;  
-            }
-            else {
-                $task->status = "no status comment provided"; 
-            }
+//             if($request->status <> null){
+//                 $task->status = $request->status;  
+//             }
+//             else {
+//                 $task->status = "no status comment provided"; 
+//             }
             
-            $task->status_short = $request->status_short;
+//             $task->status_short = $request->status_short;
             
-            $task->save();
+//             $task->save();
+
+            $request->user()->tasks()->create([
+            'title' => "no title provided",
+            'details' => "no details provided", 
+            'status' => $request->status, 
+            'status_short' => $request->status_short,  
+            'content' => $request->content,
+            ]);
             
             return redirect('/');
+            
 //        }
 //        else {
 //            echo 'You did not fill out the form properly.  Use browser "return" button to return to the previous page.';
@@ -169,7 +189,10 @@ class TasksController extends Controller
         }
         
             $task->status_short = $request->status_short;
-            $task->save();
+            
+            if (\Auth::id() === $task->user_id) {
+                $task->save();
+            }
             
             return redirect('/');
     }
@@ -183,7 +206,9 @@ class TasksController extends Controller
     public function destroy($id)
     {
         $task = Task::find($id);
-        $task->delete();
+        if (\Auth::id() === $task->user_id) {
+            $task->delete();
+        }
         return redirect('/');
     }
 }
