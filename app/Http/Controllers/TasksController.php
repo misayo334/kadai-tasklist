@@ -16,15 +16,9 @@ class TasksController extends Controller
     public function index()
     {
         
-    $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
             $tasks = $user->tasks()->orderBy('id', 'desc')->paginate(25);
-            
-            $data = [
-                'user' => $user,
-                'tasks' => $tasks,
-            ];
             
             return view('tasks.index', [
                 'tasks' => $tasks,
@@ -40,11 +34,13 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $task = new Task;
-        
-        return view('tasks.create',[
-            'task' => $task,
-        ]);
+        if (\Auth::check()) {
+            $task = new Task;
+            
+            return view('tasks.create',[
+                'task' => $task,
+            ]);
+        }
     }
 
     /**
@@ -55,6 +51,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        if (\Auth::check()) {
             $this->validate($request, [
             'title' => 'max:191',
             'details' => 'max:191',
@@ -107,6 +104,7 @@ class TasksController extends Controller
             ]);
             
             return redirect('/');
+        }
             
 //        }
 //        else {
@@ -122,11 +120,17 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task = Task::find($id);
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $task = $user->tasks()->find($id);
+//            $task = Task::find($id);
         
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
+        }
+        
+        return back();
         
     }
 
@@ -138,11 +142,14 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $task = Task::find($id);
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $task = $user->tasks()->find($id);
         
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+            return view('tasks.edit', [
+                'task' => $task,
+            ]);
+        }
         
     }
 

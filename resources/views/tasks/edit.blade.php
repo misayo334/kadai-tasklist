@@ -35,8 +35,10 @@
                     {!! Form::label('content', 'Task Content:') !!}
                     {!! Form::text('content', null, ['class' => 'form-control']) !!}
                 </div>
-        
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                
+                @if (Auth::check())
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                @endif
         
             {!! Form::close() !!}
         </div>
