@@ -120,14 +120,26 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        if (\Auth::check()) {
-            $user = \Auth::user();
-            $task = $user->tasks()->find($id);
-//            $task = Task::find($id);
+        $task = Task::find($id);
         
-            return view('tasks.show', [
-                'task' => $task,
-            ]);
+        if (\Auth::check()) {
+
+            $user = \Auth::user();
+            
+            if (\Auth::id() === $task->user_id) {
+                $task = $user->tasks()->find($id);
+            
+                return view('tasks.show', [
+                    'task' => $task,
+                ]);
+            }
+            
+            else {
+                $tasks = $user->tasks()->orderBy('id', 'desc')->paginate(25);
+                return view('tasks.index', [
+                    'tasks' => $tasks,
+                ]);
+            }
         }
         
         return back();
@@ -142,13 +154,25 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
+        $task = Task::find($id);
+        
         if (\Auth::check()) {
             $user = \Auth::user();
-            $task = $user->tasks()->find($id);
+            if (\Auth::id() === $task->user_id) {
+                
+                $task = $user->tasks()->find($id);
         
-            return view('tasks.edit', [
-                'task' => $task,
-            ]);
+                return view('tasks.edit', [
+                    'task' => $task,
+                ]);
+            }
+            else {
+                $tasks = $user->tasks()->orderBy('id', 'desc')->paginate(25);
+                return view('tasks.index', [
+                    'tasks' => $tasks,
+                ]);
+            }
+            
         }
         
     }
